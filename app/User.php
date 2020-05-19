@@ -15,11 +15,11 @@ class User extends Authenticatable
     }
 
     public function biens(){
-        return $this->hasMany('App\Bien');
+        return $this->hasMany('App\Bien','id_user');
     }
 
     public function favoris(){
-        return $this->hasMany('App\Favori');
+        return $this->hasMany('App\Favori','id_user');
     }
 
 

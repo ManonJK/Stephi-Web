@@ -18,10 +18,12 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $nom = $faker->unique()->lastName;
+    $prenom = $faker->unique()->firstName;
     return [
-        'nom' => strtoupper($faker->lastName),
-        'prenom' => $faker->firstName,
-        'mail' => $faker->unique()->safeEmail,
+        'nom' => strtoupper($nom),
+        'prenom' => $prenom,
+        'mail' => $nom.'.'.$prenom.'@example.net',
         'mail_verif' => now(),
         'phone' => $faker->phoneNumber,
         'id_agent' => null,

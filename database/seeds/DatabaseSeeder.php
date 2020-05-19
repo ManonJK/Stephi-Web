@@ -28,9 +28,10 @@ class DatabaseSeeder extends Seeder
 
         $dependances = App\Dependance::all();
         $users = App\User::all();
+        $types = App\Type::all();
 
 
-        factory(App\Bien::class, 100)->create()->each(function ($bien) use ($dependances, $agences, $users){
+        factory(App\Bien::class, 100)->create()->each(function ($bien) use ($dependances, $agences, $users, $types){
             // Génère la relation entre le bien et ses dependences
             $dependenciesCount = random_int(0, $dependances->count());
             if($dependenciesCount !== 0){
@@ -39,6 +40,9 @@ class DatabaseSeeder extends Seeder
                     $bien->dependances()->attach($dep, ['superficie' => random_int(20, 200)]);
                 }
             }
+
+            $type = $types->random();
+            $bien->type()->associate($type);
 
             // Génère la relation entre le bien et son agence
             $agency = $agences->random();

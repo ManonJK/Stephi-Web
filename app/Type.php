@@ -9,6 +9,6 @@ class Type extends Model
     public $timestamps = false;
 
     public function biens(){
-        return $this->hasMany('App\Bien');
+        return $this->hasMany('App\Bien','id_type');
     }
 }

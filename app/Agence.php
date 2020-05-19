@@ -9,7 +9,7 @@ class Agence extends Model
     public $timestamps = false;
 
     public function agents(){
-        return $this->hasMany('App\Agent');
+        return $this->hasMany('App\Agent','id_agence');
     }
 
 }
