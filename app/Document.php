@@ -9,6 +9,6 @@ class Document extends Model
     public $timestamps = false;
 
     public function vente(){
-        return $this->belongsTo('App\Vente');
+        return $this->belongsTo('App\Vente','id_vente');
     }
 }

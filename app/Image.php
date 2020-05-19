@@ -9,6 +9,6 @@ class Image extends Model
     public $timestamps = false;
 
     public function bien(){
-        return $this->belongsTo('App\Bien');
+        return $this->belongsTo('App\Bien','id_bien');
     }
 }

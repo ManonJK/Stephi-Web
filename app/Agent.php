@@ -9,7 +9,7 @@ class Agent extends Model
     public $timestamps = false;
 
     public function agence(){
-        return $this->belongsTo('App\Agence');
+        return $this->belongsTo('App\Agence', 'id_agence');
     }
 
     public function users(){

@@ -11,7 +11,7 @@ class User extends Authenticatable
     public $timestamps = false;
 
     public function agent(){
-        return $this->belongsTo('App\Agent');
+        return $this->belongsTo('App\Agent','id_agent');
     }
 
     public function biens(){

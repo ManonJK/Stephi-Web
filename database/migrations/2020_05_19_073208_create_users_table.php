@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('mail')->unique();
             $table->timestamp('mail_verif')->nullable();
             $table->string('phone');
-            $table->unsignedBigInteger('id_agent');
+            $table->unsignedBigInteger('id_agent')->nullable();
             $table->foreign('id_agent')->references('id')->on('agents');
             $table->string('password');
             $table->rememberToken();

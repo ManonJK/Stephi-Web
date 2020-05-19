@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Ventes extends Migration
+class DependancesBiens extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class Ventes extends Migration
      */
     public function up()
     {
-        Schema::create('ventes', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->enum('status', ['En cours', 'Annulée', 'Vendu']);
-            $table->date('date_parution');
-            $table->date('date_vente')->nullable();
+        Schema::create('dependances_biens', function (Blueprint $table) {
             $table->unsignedBigInteger('id_bien');
             $table->foreign('id_bien')->references('id')->on('biens');
+            $table->unsignedBigInteger('id_dependance');
+            $table->foreign('id_dependance')->references('id')->on('dependances');
+            $table->integer('superficie');
         });
     }
 
@@ -30,6 +29,6 @@ class Ventes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ventes');
+        Schema::dropIfExists('dependances_biens');
     }
 }
