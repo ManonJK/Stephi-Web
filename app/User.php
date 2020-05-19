@@ -8,6 +8,23 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public $timestamps = false;
+
+    public function agent(){
+        return $this->belongsTo('App\Agent');
+    }
+
+    public function biens(){
+        return $this->hasMany('App\Bien');
+    }
+
+    public function favoris(){
+        return $this->hasMany('App\Favori');
+    }
+
+
+
+
     use Notifiable;
 
     /**
