@@ -55,9 +55,16 @@ class DatabaseSeeder extends Seeder
             $member->save();
         });
 
+        $ventes = factory(App\Vente::class, 100)->create();
+        for ($i = 0; $i<sizeof($ventes); $i++){
+            $ventes[$i]->id_bien = $i+1;
+            $ventes[$i]->save();
+        }
+
         $images = factory(App\Image::class, 100)->create();
         for ($i = 0; $i<sizeof($images); $i++){
-            $images[$i]->id_bien = $i;
+            $images[$i]->id_bien = $i+1;
+            $images[$i]->save();
         }
     }
 }

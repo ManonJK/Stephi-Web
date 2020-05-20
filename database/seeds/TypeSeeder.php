@@ -12,10 +12,10 @@ class TypeSeeder extends Seeder
     public function run()
     {
         $array = [
-            ['titre' => 'maison'],
-            ['titre' => 'appartement'],
-            ['titre' => 'villa'],
-            ['titre' => 'studio']
+            ['titre' => 'Maison'],
+            ['titre' => 'Appartement'],
+            ['titre' => 'Villa'],
+            ['titre' => 'Studio']
         ];
 
         App\Type::insert($array);

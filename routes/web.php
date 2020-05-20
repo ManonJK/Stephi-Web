@@ -12,8 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('Annonces.index'));
 });
+
+//Route::get('Annonces/{id}', function () {
+//    return redirect(route('Annonces.show'));
+//});
+
+Route::get('Annonces/{id}', 'VenteController@show');
+
+Route::resource('Annonces', 'VenteController');
 
 Auth::routes();
 

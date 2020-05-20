@@ -13,6 +13,6 @@ class Vente extends Model
     }
 
     public function bien(){
-        return $this->belongsTo('App\Bien','id_vente');
+        return $this->belongsTo('App\Bien','id_bien');
     }
 }

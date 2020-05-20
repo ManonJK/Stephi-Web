@@ -12,7 +12,7 @@ $factory->define(\App\Bien::class, function (Faker $faker) {
         'superficie' => random_int(5, 300),
         'nb_pieces' => random_int(1, 10),
         'etage' => random_int(0, 8),
-        'localisation' => $faker->address,
+        'localisation' => $faker->city,
         'descriptif' => $faker->text,
         'prix_min' => $prix_min,
         'prix_max' => $prix_max,

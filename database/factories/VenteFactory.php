@@ -6,8 +6,9 @@ use App\Model;
 use Faker\Generator as Faker;
 
 $factory->define(\App\Vente::class, function (Faker $faker) {
+    $status = ['En cours', 'Annulée', 'Vendu'];
     return [
-        'status' => array_rand(['En cours', 'Annulée', 'Vendu']),
+        'status' => $status[array_rand($status)],
         'date_parution' => $faker->date(),
         'date_vente' => null,
         'id_bien' => 1,
