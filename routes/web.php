@@ -11,26 +11,36 @@
 |
 */
 
+Auth::routes();
+
+
 Route::get('/', function () {
     return redirect(route('Annonces.index'));
 });
-
-Route::get('Annonces/{id}', 'VenteController@show');
-
-Route::get('Annonces/cancel/{id}', 'VenteController@cancel');
 
 Route::resource('Annonces', 'VenteController');
 
 Route::resource('Profil', 'UserController');
 
+Route::resource('Favoris', 'FavoriController');
+
+Route::resource('Biens', 'BienController');
+
+
+Route::get('Annonces/{id}', 'VenteController@show');
+
+Route::get('Annonces/cancel/{id}', 'VenteController@cancel');
+
 Route::get('/Profil', 'UserController@show')->name('Profil');
 
-Auth::routes();
-
 Route::get('/Home', 'HomeController@index')->name('home');
+
+Route::get('Favoris/del/{id}', 'FavoriController@destroy');
+
+Route::get('Favoris/Store/{id}', 'FavoriController@store');
+
+
 
 Route::post('Profil/{user}/update',  ['as' => 'Profil.update', 'uses' => 'UserController@update']);
 
 Route::post('Profil/{user}/update/phone',  ['as' => 'Profil.update_phone', 'uses' => 'UserController@update_phone']);
-
-Route::get('Favoris/del/{id}', 'FavoriController@destroy');

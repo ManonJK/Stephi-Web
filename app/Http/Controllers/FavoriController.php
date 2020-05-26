@@ -33,9 +33,16 @@ class FavoriController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_bien)
     {
-        //
+
+        $favori = new Favori([
+            'id_user'=>$request->user()->id,
+            'id_bien'=>$id_bien
+        ]);
+        $favori->save();
+
+        return back();
     }
 
     /**
@@ -75,12 +82,13 @@ class FavoriController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Favori  $favori
+     * @param  Request  $request
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        Favori::find($id)->delete();
-        return back()->with('success', 'Le bien a été supprimé de vos favoris');
+        Favori::where('id_bien',$id)->where('id_user', $request->user()->id )->delete();
+        return back();
     }
 }

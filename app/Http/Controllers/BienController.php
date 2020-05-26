@@ -25,7 +25,7 @@ class BienController extends Controller
      */
     public function create()
     {
-        //
+        return view('biens.create');
     }
 
     /**

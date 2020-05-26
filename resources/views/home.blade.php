@@ -85,10 +85,10 @@
                         <td>{{$favori->bien->vente->status}}</td>
                         <td>
                         @if($favori->bien->vente->status==='En cours')
-                                <button type="button" class="btn btn-info">Voir le bien</button>
+                                <a href="{{ url('Annonces/'.$favori->bien->vente->id) }}" type="button" class="btn btn-info">Voir le bien</a>
                         @endif
 
-                            <a href="{{url('Favoris/del/'.$favori->id)}}" type="button" class="btn btn-danger">Supprimer des favoris</a>
+                            <a href="{{url('Favoris/del/'.$favori->id_bien)}}" type="button" class="btn btn-danger">Supprimer des favoris</a>
                         </td>
                     </tr>
                     @endforeach

@@ -49,7 +49,28 @@
             </div>
             <div class="col-md-auto">
                 <div class="d-flex flex-column description_vente">
-                    <h1>{{$vente->bien->type->titre}} {{$vente->bien->superficie}} m² - {{$vente->bien->prix_vente}}€</h1>
+                    <div class="row">
+                        <div class="col">
+                            <h1>{{$vente->bien->type->titre}} {{$vente->bien->superficie}} m² - {{$vente->bien->prix_vente}}€</h1>
+                        </div>
+                        <div class="col">
+                    @auth
+
+{{--                    On vérifie si le bien est déjà en favori ou non--}}
+
+                        @if(!Auth::user()->favoris->where('id_bien',$vente->bien->id)->isEmpty())
+{{--                            N'est pas vide--}}
+                            <a href="{{url('Favoris/del/'.$vente->bien->id)}}"><i class="fas fa-heart"></i></a>
+                        @else
+{{--                            Est vide--}}
+                            <a href="{{url('Favoris/Store/'.$vente->bien->id)}}"><i class="far fa-heart"></i></a>
+                        @endif
+
+
+
+                    @endauth
+                        </div>
+                    </div>
                     <p class="text-muted">{{$vente->bien->localisation}}</p>
                     <span class="d-inline-block">Description :</span>
                     <span class="d-inline-block">{{$vente->bien->descriptif}}</span>
@@ -59,7 +80,7 @@
                         <label>Calculer mes chances d'obtenir ce bien pour le prix de :</label>
                         <div class="d-flex flex-row justify-content-start">
                             <div class="input-box">
-                                <label id="simprix" class="input-label">Prix (€)</label>
+                                <label id="simprix" for="prix_sim" class="input-label">Prix (€)</label>
                                 <input id="prix_sim" name="prix_sim" required type="number" min="{{$vente->bien->prix_min}}" max="{{$vente->bien->prix_max}}" class="input-1" onfocus="setFocus(true)" onblur="setFocus(false)" />
                             </div>
                             <button type="button" onclick="get_simulation()" class="btn btn_offre btn-primary pull-right">Simuler mon offre</button>
