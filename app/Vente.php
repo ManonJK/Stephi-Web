@@ -15,4 +15,8 @@ class Vente extends Model
     public function bien(){
         return $this->belongsTo('App\Bien','id_bien');
     }
+
+    protected $fillable = [
+        'status', 'date_parution', 'date_vente',
+    ];
 }

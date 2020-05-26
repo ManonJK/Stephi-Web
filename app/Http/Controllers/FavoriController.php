@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Vente;
+use App\Favori;
 use Illuminate\Http\Request;
 
-class VenteController extends Controller
+class FavoriController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class VenteController extends Controller
      */
     public function index()
     {
-        $annonces = Vente::where('status','En cours')->paginate(15);
-        return view('annonces.index', compact('annonces'));
+        //
     }
 
     /**
@@ -42,21 +41,21 @@ class VenteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  \App\Favori  $favori
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Favori $favori)
     {
-        return view('annonces.show', ['vente' => Vente::findOrFail($id)]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Vente  $vente
+     * @param  \App\Favori  $favori
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vente $vente)
+    public function edit(Favori $favori)
     {
         //
     }
@@ -65,10 +64,10 @@ class VenteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vente  $vente
+     * @param  \App\Favori  $favori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vente $vente)
+    public function update(Request $request, Favori $favori)
     {
         //
     }
@@ -76,26 +75,12 @@ class VenteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vente  $vente
+     * @param  \App\Favori  $favori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vente $vente)
+    public function destroy($id)
     {
-        //
-    }
-
-
-    /**
-     * Cancel the specified sale in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vente  $vente
-     * @return \Illuminate\Http\Response
-     */
-    public function cancel($id)
-    {
-        Vente::find($id)->update(['status' => 'Annulée']);
-
-        return back()->with('success', 'La vente a été annulée avec succès !');
+        Favori::find($id)->delete();
+        return back()->with('success', 'Le bien a été supprimé de vos favoris');
     }
 }

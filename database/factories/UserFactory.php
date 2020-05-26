@@ -23,7 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'nom' => strtoupper($nom),
         'prenom' => $prenom,
-        'mail' => $nom.'.'.$prenom.'@example.net',
+        'email' => $nom.'.'.$prenom.'@example.net',
         'mail_verif' => now(),
         'phone' => $faker->phoneNumber,
         'id_agent' => null,

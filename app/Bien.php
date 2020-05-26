@@ -10,7 +10,7 @@ class Bien extends Model
 
     public function vente()
     {
-        return $this->belongsTo('App\Vente', 'id_vente');
+        return $this->hasOne('App\Vente', 'id_bien');
     }
 
     public function images()
