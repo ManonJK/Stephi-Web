@@ -211,3 +211,7 @@ td {
   color: #c40b0b;
 }
 
+.required {
+  color: red;
+}
+

@@ -39,8 +39,12 @@ Route::get('Favoris/del/{id}', 'FavoriController@destroy');
 
 Route::get('Favoris/Store/{id}', 'FavoriController@store');
 
+Route::get('Biens/edit/{id}', 'BienController@edit');
+
 
 
 Route::post('Profil/{user}/update',  ['as' => 'Profil.update', 'uses' => 'UserController@update']);
+
+Route::put('Biens/{bien}/update',  ['as' => 'Bien.update', 'uses' => 'BienController@update']);
 
 Route::post('Profil/{user}/update/phone',  ['as' => 'Profil.update_phone', 'uses' => 'UserController@update_phone']);

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bien extends Model
 {
+    protected $fillable =
+        ['superficie', 'nb_pieces', 'etage', 'localisation', 'descriptif', 'prix_min', 'prix_max', 'prix_vente', 'id_user', 'id_type'];
+
     public $timestamps = false;
 
     public function vente()
@@ -20,7 +23,7 @@ class Bien extends Model
 
     public function dependances()
     {
-        return $this->belongsToMany('App\Dependance','dependances_biens','id_bien','id_dependance');
+        return $this->hasMany('App\Dependance','id_bien');
     }
 
     public function type()

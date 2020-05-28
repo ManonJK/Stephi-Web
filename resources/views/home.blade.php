@@ -10,7 +10,7 @@
                 <h3>Mes biens</h3>
             </div>
             <div class="col-6 col-sm-2">
-                <a href="#" class="btn btn-outline-success">Ajouter un bien</a>
+                <a href="{{ url('Biens/create') }}" class="btn btn-outline-success">Ajouter un bien</a>
             </div>
         </div>
         <table class="table table-sm">
@@ -43,7 +43,7 @@
                         <td>{{$bien->vente->status}}</td>
                         @if($bien->vente->status==='En cours')
                             <td>
-                                <button type="button" class="btn btn-warning">Modifier</button>
+                                <a href="{{url('Biens/edit/'.$bien->id)}}" type="button" class="btn btn-warning">Modifier</a>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_sale{{$bien->vente->id}}">Annuler la vente</button>
                             </td>
                             @else
