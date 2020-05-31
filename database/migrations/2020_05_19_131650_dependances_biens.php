@@ -19,6 +19,10 @@ class DependancesBiens extends Migration
             $table->unsignedBigInteger('id_dependance');
             $table->foreign('id_dependance')->references('id')->on('dependances');
             $table->integer('superficie');
+            $table->unique([
+                'id_bien',
+                'id_dependance'
+            ]);
         });
     }
 

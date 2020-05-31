@@ -23,7 +23,7 @@ class Bien extends Model
 
     public function dependances()
     {
-        return $this->hasMany('App\Dependance','id_bien');
+        return $this->belongsToMany('App\Dependance','dependances_biens','id_bien','id_dependance')->withPivot('superficie');
     }
 
     public function type()

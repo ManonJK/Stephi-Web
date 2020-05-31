@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(App\Image::class, function (Faker $faker) {
-    $liens = ['images/fakeimg', 'images/fakeimg2', 'images/fakeimg3', 'images/fakeimg4', 'images/fakeimg5'];
+    $liens = ['images/fakeimg.jpg', 'images/fakeimg2.jpg', 'images/fakeimg3.jpg', 'images/fakeimg4.jpg', 'images/fakeimg5.jpg'];
     return [
         'lien' => $liens[array_rand($liens)],
         'id_bien' => 1,

@@ -17,12 +17,13 @@ class Agents extends Migration
             $table->bigIncrements('id');
             $table->string('nom');
             $table->string('prenom');
-            $table->string('mail');
+            $table->string('email');
             $table->timestamp('mail_verif')->nullable();
             $table->string('phone');
             $table->boolean('admin')->default(false);
             $table->unsignedBigInteger('id_agence');
             $table->foreign('id_agence')->references('id')->on('agences');
+            $table->string('password');
         });
     }
 

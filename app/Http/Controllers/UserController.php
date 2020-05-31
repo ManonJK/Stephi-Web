@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Agent;
+use App\Mail\OffreMail;
 use App\User;
+use App\Vente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -80,7 +85,6 @@ class UserController extends Controller
 
         $user->fill($data);
         $user->save();
-//        Flash::message('Mise à jour de votre profil effectuée avec succès !');
 
         return back()->with('success', 'Mise à jour de votre profil effectuée avec succès !');
     }
@@ -118,11 +122,38 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy()
     {
-        //
+        $user = Auth::user();
+        $user->archive=true;
+        $user->save();
+        Auth::logout();
+        return redirect('/')->with('success', 'Votre compte a été supprimé avec succès');
+    }
+
+
+    /**
+     * Send an email offer to the seller
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  $id_seller
+     * @param $id_sale
+     * @return \Illuminate\Http\Response
+     */
+    public function send_offer_email(Request $request, $id_sale, $id_seller){
+
+        $request->validate([
+            'prix'=>'required',
+        ]);
+
+        $estate = Vente::find($id_sale)->bien;
+        $seller_email = User::find($id_seller)->email;
+        $agent_email = User::find($id_seller)->agent->email;
+        Mail::to($seller_email)
+            ->cc($agent_email)
+            ->send(new OffreMail($request->user(), $request->get('prix'), $estate));
+        return back()->with('success', 'Votre proposition d\'achat a bien été envoyé au vendeur du bien');
     }
 }

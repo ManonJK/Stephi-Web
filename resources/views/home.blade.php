@@ -20,6 +20,7 @@
                 <th scope="col">Superficie</th>
                 <th scope="col">Localisation</th>
                 <th scope="col">Status</th>
+                <th scope="col">Mis en favoris</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -41,6 +42,7 @@
                         <td>{{$bien->superficie}}m²</td>
                         <td>{{$bien->localisation}}</td>
                         <td>{{$bien->vente->status}}</td>
+                        <td>{{$bien->favoris->count()}} fois</td>
                         @if($bien->vente->status==='En cours')
                             <td>
                                 <a href="{{url('Biens/edit/'.$bien->id)}}" type="button" class="btn btn-warning">Modifier</a>

@@ -16,9 +16,6 @@ class Dependances extends Migration
         Schema::create('dependances', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nom');
-            $table->integer('superficie');
-            $table->unsignedBigInteger('id_bien');
-            $table->foreign('id_bien')->references('id')->on('biens');
         });
     }
 

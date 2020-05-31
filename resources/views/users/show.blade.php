@@ -209,7 +209,7 @@
                         <div class="modal fade" id="delaccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form method="POST" action="">
+                                    <form method="POST" action="{{route('Profil.destroy', $user) }}">
                                         @csrf
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
@@ -222,7 +222,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
-                                            <button type="button" class="btn btn-danger">Oui, je supprime mon compte</button>
+                                            <button type="submit" class="btn btn-danger">Oui, je supprime mon compte</button>
                                         </div>
                                     </form>
                                 </div>

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Vente;
+use App\Image;
 use Illuminate\Http\Request;
 
-class VenteController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class VenteController extends Controller
      */
     public function index()
     {
-        $annonces = Vente::where('status','En cours')->orderBy('date_parution', 'DESC')->paginate(15);
-        return view('annonces.index', compact('annonces'));
+        //
     }
 
     /**
@@ -32,31 +31,45 @@ class VenteController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param $id_bien
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_bien)
     {
-        //
+        $request->validate([
+            'attachment'=>'required',
+        ]);
+
+        $file = $request->file('attachment');
+        $path = $file->storeAs('images',time().'.'.$file->extension(),'public');
+        $link = time().'.'.$file->extension();
+        $img = new Image([
+            'id_bien'=>$id_bien,
+            'lien'=>'images/'.$link,
+        ]);
+        $img->save();
+
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Image $image)
     {
-        return view('annonces.show', ['vente' => Vente::findOrFail($id)]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Vente  $vente
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vente $vente)
+    public function edit(Image $image)
     {
         //
     }
@@ -65,10 +78,10 @@ class VenteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vente  $vente
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vente $vente)
+    public function update(Request $request, Image $image)
     {
         //
     }
@@ -76,26 +89,13 @@ class VenteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vente  $vente
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vente $vente)
+    public function destroy($id)
     {
-        //
-    }
-
-
-    /**
-     * Cancel the specified sale in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vente  $vente
-     * @return \Illuminate\Http\Response
-     */
-    public function cancel($id)
-    {
-        Vente::find($id)->update(['status' => 'Annulée']);
-
-        return back()->with('success', 'La vente a été annulée avec succès !');
+        $image = Image::find($id);
+        $image->delete();
+        return back();
     }
 }

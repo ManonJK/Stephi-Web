@@ -7,6 +7,7 @@ use App\Image;
 use App\Type;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class BienController extends Controller
 {
@@ -67,22 +68,50 @@ class BienController extends Controller
         ]);
         $bien->save();
 
-        $files = $request->file('attachment');
 
         if($request->hasFile('attachment'))
         {
-            foreach ($files as $file) {
-                $file->store('storage/app/public/images/' . $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension());
-                $link = $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
+            $message = 'image ok';
+            foreach ($request->file('attachment') as $file) {
+                $path = $file->storeAs('images',time().'.'.$file->extension(),'public');
+                $link = time().'.'.$file->extension();
                 $img = new Image([
-                    'id_bien'=>$request->user()->id,
-                    'lien'=>$link,
+                    'id_bien'=>$bien->id,
+                    'lien'=>'images/'.$link,
                 ]);
                 $img->save();
             }
+        } else{
+            $message = 'pas image';
         }
 
-        return redirect('/Home')->with('success', 'Votre bien a été créé avec succès !');
+        return redirect('/Home')->with('success', 'Votre bien a été créé avec succès !' . $message . public_path());
+    }
+
+    /**
+     * Store a newly created resource in dependances.
+     *
+     * @param Request $request
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function create_dep(Request $request, $id){
+        $data = $request->validate([
+            'type'=>'required',
+            'superficie'=>'required'
+        ]);
+
+        $bien = Bien::find($id);
+
+        try {
+
+            $bien->dependances()->attach($data['type'], ['superficie' => $data['superficie']]);
+        } catch(QueryException $e){
+            return back()->with('error', 'Une erreur s\'est produite, vous avez sûrement essayé d\'ajouter un doublon');
+        }
+
+        return back()->with('succes', 'Votre dépendance a été ajoutée avec succès!');
+
     }
 
     /**
@@ -95,6 +124,26 @@ class BienController extends Controller
     {
         //
     }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  array $data
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request, array $data, Bien $bien)
+    {
+        $data = $request->validate([
+            'location'=>'string',
+            'prix_min'=>'int',
+            'prix_max'=>'int',
+            'nb_pieces'=>'int',
+            'type'=>'int'
+        ]);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -114,7 +163,7 @@ class BienController extends Controller
      * @param  \App\Bien  $bien
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bien $bien)
+    public function update(Request $request, $id)
     {
         $data = $request->validate([
             'localisation'=>'required',
@@ -127,10 +176,25 @@ class BienController extends Controller
             'prix_vente'=>'required',
         ]);
 
-        $bien->fill($data);
-        $bien->save();
+        $bien = Bien::where('id', $id);
+        $bien->update($data);
+//
+//        $bien->fill($data);
+//        $bien->save();
 
-        return redirect('Home')->with('success', 'Mise à jour de votre bien effectuée avec succès !');
+        return redirect('/Home')->with('success', 'Mise à jour de votre bien effectuée avec succès !');
+    }
+
+    public function update_dep(Request $request, $id_bien, $id_dep){
+
+        $data = $request->validate([
+            'superficie'=>'required',
+        ]);
+
+        $bien = Bien::find($id_bien);
+        $bien->dependances()->updateExistingPivot($id_dep, $data);
+        return back();
+
     }
 
     /**
@@ -142,5 +206,19 @@ class BienController extends Controller
     public function destroy(Bien $bien)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $id_bien
+     * @param $id_dep
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_dep($id_bien, $id_dep)
+    {
+        $bien = Bien::find($id_bien);
+        $bien->dependances()->detach($id_dep);
+        return back();
     }
 }

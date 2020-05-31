@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Nouveau bien') }}</div>
                     <div class="card-body">
-                        <form method="post" class="form" action="{{route('Biens.store')}}">
+                        <form method="post" id="upload" enctype="multipart/form-data" class="form" action="{{route('Biens.store')}}">
                             @csrf
                             <div class="form-group row">
                                 <span class="required">* Champs obligatoires</span>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="attachment">Photos (format jpg/jpeg) :</label>
-                                <input type="file" accept="image/jpeg" multiple id="attachment" class="form-control" name="attachment[]"/>
+                                <input type="file" accept="image/jpeg" multiple="multiple" id="attachment" class="form-control" name="attachment[]" required/>
                             </div>
                             <div class="form-group row">
                                 <button type="submit" class="btn btn-success">Valider</button>

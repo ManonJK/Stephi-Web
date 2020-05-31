@@ -8,7 +8,7 @@ class Dependance extends Model
 {
     public $timestamps = false;
 
-    public function bien(){
-        return $this->belongsTo('App\Bien', 'id_bien');
+    public function biens(){
+        return $this->belongsToMany('App\Bien','dependances_biens','id_dependance','id_bien')->withPivot('superficie');
     }
 }

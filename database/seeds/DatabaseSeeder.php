@@ -66,5 +66,25 @@ class DatabaseSeeder extends Seeder
             $images[$i]->id_bien = $i+1;
             $images[$i]->save();
         }
+
+        $my_client = New App\User([
+            'nom' => 'Totoute',
+            'prenom' => 'Biloute',
+            'phone' => Hash::make('0601020304'),
+            'birth_date' => '1994-12-25',
+            'email' => 'toto@gmail.com',
+            'password' => Hash::make('totototo'),
+        ]);
+        $my_client->save();
+
+        $myagent = New App\Agent([
+            'nom' => 'JK',
+            'prenom' => 'Manon',
+            'phone' => Hash::make('0626103528'),
+            'email' => 'manon@gmail.com',
+            'password' => Hash::make('totototo'),
+            'id_agence' => '1',
+        ]);
+        $myagent->save();
     }
 }
