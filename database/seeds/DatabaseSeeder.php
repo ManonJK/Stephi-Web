@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -86,8 +87,23 @@ class DatabaseSeeder extends Seeder
             'birth_date' => '1994-12-25',
             'email' => 'toto@gmail.com',
             'password' => Hash::make('totototo'),
+            'id_agent' => 31,
         ]);
         $my_client->save();
+
+        $myfirstestate = New \App\Bien([
+            'superficie' => 600,
+            'nb_pieces' => 14,
+            'etage' => 2,
+            'localisation' => 'Aix-en-Provence',
+            'descriptif' => 'Mon imaginaire est vraiment cool, il a plein de trucs dont une piscine. Vous devriez acheter !',
+            'prix_min' => 100000,
+            'prix_max' => 900000,
+            'prix_vente' => 666666,
+            'id_user' => 201,
+            'id_type' => 3,
+        ]);
+        $myfirstestate->save();
 
 
     }
