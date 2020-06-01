@@ -15,12 +15,24 @@ class DatabaseSeeder extends Seeder
 
         $this->call(DependanceSeeder::class);
 
+
+
         factory(App\Agence::class, 10)->create();
         $agences = App\Agence::all();
         factory(App\Agent::class, 30)->create()->each(function($agent) use ($agences){
             $agent->agence()->associate($agences->random());
             $agent->save();
         });
+
+        $myagent = New App\Agent([
+            'nom' => 'JK',
+            'prenom' => 'Manon',
+            'phone' => Hash::make('0626103528'),
+            'email' => 'manon@gmail.com',
+            'password' => Hash::make('totototo'),
+            'id_agence' => '1',
+        ]);
+        $myagent->save();
 
 
         factory(App\User::class, 200)->create();
@@ -77,14 +89,6 @@ class DatabaseSeeder extends Seeder
         ]);
         $my_client->save();
 
-        $myagent = New App\Agent([
-            'nom' => 'JK',
-            'prenom' => 'Manon',
-            'phone' => Hash::make('0626103528'),
-            'email' => 'manon@gmail.com',
-            'password' => Hash::make('totototo'),
-            'id_agence' => '1',
-        ]);
-        $myagent->save();
+
     }
 }
