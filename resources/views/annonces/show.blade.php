@@ -128,6 +128,7 @@
                     </div>
                     @endif
                     <span>Prix minimum souhaité : {{$vente->bien->prix_min}}€</span>
+                    <span>Frais d'agence : {{$vente->bien->user->agent->agence->frais_agence}}%</span>
 
 
                     @if($vente->status === 'En cours')
