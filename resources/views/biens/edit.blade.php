@@ -73,7 +73,7 @@
                                         <td>{{$dep->nom}}</td>
                                         <td>{{$dep->pivot->superficie}}m²</td>
                                         <td>
-                                            <button type="button" data-toggle="modal" data-target="#edit_dep" class="btn btn-warning">Modifier</button>
+                                            <button type="button" data-toggle="modal" data-target="#edit_dep{{$dep->id}}" class="btn btn-warning">Modifier</button>
                                             <a href="{{url('Dependance/del/'.$bien->id.'/'.$dep->id)}}" type="button" class="btn btn-danger">Supprimer</a>
                                         </td>
                                     </tr>
@@ -147,8 +147,9 @@
                         </div>
 
 
+                    @foreach($bien->dependances as $dep)
                         <!-- Modal -->
-                        <div class="modal fade" id="edit_dep" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="edit_dep{{$dep->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <form method="post" class="form" action="{{route('Dependance.update', ['id_bien' => $bien->id, 'id_dep'=>$dep->id])}}">
@@ -180,6 +181,7 @@
                                 </div>
                             </div>
                         </div>
+                    @endforeach
 
                         <!-- Modal -->
                         <div class="modal fade" id="add_img" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

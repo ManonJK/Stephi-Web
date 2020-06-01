@@ -69,7 +69,9 @@
             @foreach($annonces as $annonce)
                 <div class="card card-annonce">
                     <a href="{{ url('Annonces/'.$annonce->id) }}">
+                        @if(!$annonce->bien->images->isEmpty())
                         <img src="{{asset('storage/'.$annonce->bien->images[0]->lien)}}" class="card-img-top card-img-top-annonce" alt="image de l'annonce">
+                        @endif
                         <div class="card-body card-annonce-body">
                             <h5 class="card-title">{{$annonce->bien->type->titre}} {{$annonce->bien->superficie}} m² - {{$annonce->bien->prix_vente}}€</h5>
                             <p class="card-text">

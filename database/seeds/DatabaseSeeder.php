@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
         $myagent->save();
 
 
+
+
         factory(App\User::class, 200)->create();
 
 
@@ -104,6 +106,7 @@ class DatabaseSeeder extends Seeder
             'id_type' => 3,
         ]);
         $myfirstestate->save();
+
 
 
     }
