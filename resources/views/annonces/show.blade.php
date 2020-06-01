@@ -88,20 +88,21 @@
                             <h1>{{$vente->bien->type->titre}} {{$vente->bien->superficie}} m² - {{$vente->bien->prix_vente}}€</h1>
                         </div>
                         <div class="col">
-                            @if($vente->status === 'En cours' && $vente->bien->id_user !== Auth::user()->id)
+                            @if($vente->status === 'En cours')
                                 @auth
+                                    @if($vente->bien->id_user !== Auth::user()->id)
 
-            {{--                    On vérifie si le bien est déjà en favori ou non--}}
+                {{--                    On vérifie si le bien est déjà en favori ou non--}}
 
-                                    @if(!Auth::user()->favoris->where('id_bien',$vente->bien->id)->isEmpty())
-            {{--                            N'est pas vide--}}
-                                        <a href="{{url('Favoris/del/'.$vente->bien->id)}}"><i class="fas fa-heart"></i></a>
-                                    @else
-            {{--                            Est vide--}}
-                                        <a href="{{url('Favoris/Store/'.$vente->bien->id)}}"><i class="far fa-heart"></i></a>
+                                        @if(!Auth::user()->favoris->where('id_bien',$vente->bien->id)->isEmpty())
+                {{--                            N'est pas vide--}}
+                                            <a href="{{url('Favoris/del/'.$vente->bien->id)}}"><i class="fas fa-heart"></i></a>
+                                        @else
+                {{--                            Est vide--}}
+                                            <a href="{{url('Favoris/Store/'.$vente->bien->id)}}"><i class="far fa-heart"></i></a>
+                                        @endif
+
                                     @endif
-
-
 
                                 @endauth
                             @elseif ($vente->bien->id_user === Auth::user()->id)
@@ -130,7 +131,7 @@
 
 
                     @if($vente->status === 'En cours')
-                        @if($vente->bien->id_user !== Auth::user()->id)
+                        @if(Auth::user() && $vente->bien->id_user !== Auth::user()->id || !Auth::user())
                             <form id="form">
                                 <label>Calculer mes chances d'obtenir ce bien pour le prix de :</label>
                                 <div class="d-flex flex-row justify-content-start">
