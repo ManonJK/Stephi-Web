@@ -1,78 +1,35 @@
+# Stephi Place Web Sales 
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## A propos du projet
 
-## About Laravel
+Ce projet a été réalisé en collaboration avec SEGUIN Ghislain dans le cadre de notre 2ème année de bachelor informatique.
+Ce projet a été développé avec le framework Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Sujet du projet
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> Equiper la société Stephi Place Real Estate et l’accompagner dans son développement national
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Stephi Place Real Estate est un réseau d’agences immobilières britannique. Dirigé par la très médiatique Stephi Place, star de la téléréalité (I want to sell my house, Houses hunter’s, Looking for my appartment), Stephi Place Real Estate est implantée en France dont le siège est situé à Aix en Provence.
+L’entreprise compte développer rapidement un réseau d’agences sur l’ensemble du territoire national. Le réseau est constitué d’environ 50 agences réparties sur la France entière. Chaque agence possède sa propre connexion à internet.
 
-## Learning Laravel
+### Spécification web
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+La société Stephi Place Real Estate souhaite développer un site Web de gestion de vente de biens immobiliers : Stephi Place Web Sales.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Ce site doit être accessible pour tout public. Les fonctionnalités avancées sont accessibles pour tout utilisateur authentifié, et doit permettre plusieurs fonctionnalités, notamment l’ajout d’un bien immobilier, l’ajout d’un client, aussi bien vendeur qu’acheteur potentiel, la modification des informations du client, la réalisation d‘une vente, la gestion des favoris, la gestion des proposition …
 
-## Laravel Sponsors
+Un bien immobilier peut être aussi bien un appartement qu’une villa, est décrit par son type, sa superficie, le nombre de pièces, l’étage dans le cas d’un appartement, sa localisation, un descriptif, les dépendances associées (jardin, cave, loggia, cellier, terrasse, garage, ...) et leurs superficies, le prix de vente minimum souhaité, le prix de vente maximum, le prix de mise en vente, ainsi que les frais d’agence.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Les biens sont mis en vente par le client d’une agence, chaque agence possède donc des biens à vendre. L’ensemble des biens à vendre de chaque agence est visible sur le site du siège au niveau national.
+Un acheteur potentiel, nommé client final, peut s’inscrire sur le site, à condition qu’il dispose d’une adresse mail valide qui lui servira d’identifiant et en renseignant une série d’informations personnelles telles que son nom, prénom, adresse, numéro de téléphone mobile. Il disposera alors d’un espace dédié, au sein duquel il pourra modifier ses informations personnelles, ajouter des annonces dans ses favoris.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+Il pourra aussi faire des propositions d’achat, visualiser l’état de ses proposition et accéder à un simulateur de proposition.
+Un vendeur a des possibilités d’inscription similaire et peut en supplément, visualiser le nombre de fois que son annonce a été visité, combien de fois elle a été ajoutée en favori ainsi les propositions d’achats faites pour ses biens. Un vendeur est représenté par un agent immobilier de l’agence dans lequel il met en vente son bien. C’est l’agent immobilier qui est charge de la création de l’annonce sur le site.
+Sur le site, on considère que les acheteurs, comme les vendeurs, sont des membres. Ainsi, un membre peut être un acheteur ou un vendeur, ou les deux.
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Concernant la fonctionnalité de propositions d’achats et de négociation, seules les 5 premières propositions d’achats sont retenues (par ordre chronologique). À chaque nouvelle proposition, le vendeur et son agent immobilier sont notifiés par mail.
+Le vendeur peut faire une contre-proposition sur l’offre de son choix. À ce moment-là, les autres propositions d’achats sont bloquées jusqu’à ce que la contre-proposition soit refusée ou acceptée par l’acheteur.
+Si la contre-proposition est acceptée, ou qu’une vente est réalisée, tous les clients ayant fait une proposition sur le bien vendu sont notifiés, ainsi que ceux qui avaient l’annonce dans leurs favoris.
+Le fonctionnement du simulateur du processus de proposition et contre-proposition est le suivant : un acheteur peut faire une proposition d’achat pour un bien au simulateur. Le simulateur propose alors à l’acheteur des statistiques indiquant les chances qu’a la proposition d’être acceptée, refusée, ou soumise à contre-proposition.
